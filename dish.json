@@ -1,0 +1,12 @@
+{
+  "source": {
+    "baseurl": "https://play.dhis2.org/2.28",
+    "username": "admin",
+    "password": "district"
+  },
+  "target": {
+    "baseurl": "http://localhost:8080",
+    "username": "admin",
+    "password": "district"
+  }
+}

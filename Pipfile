@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+requests = "*"
+logzero = "*"
+colorama = {markers = "sys_platform == 'win32'"}
+
+[requires]
+python_version = "3.5"
