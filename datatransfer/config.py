@@ -47,7 +47,7 @@ def setup_logger(log_path):
     formatter = logzero.LogFormatter(fmt=log_format)
     logzero.setup_default_logger(formatter=formatter)
 
-    logzero.loglevel(logging.DEBUG)
+    logzero.loglevel(logging.INFO)
 
     # Log file
     log_format_no_color = '* %(levelname)1s  %(asctime)s  %(message)s [%(module)s:%(lineno)d]'

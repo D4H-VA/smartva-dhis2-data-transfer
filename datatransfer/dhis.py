@@ -124,7 +124,7 @@ class Dhis(object):
         except requests.RequestException:
             raise GenericImportException("POST failed - {} {}".format(r.url, r.text))
 
-    def get_events(self, import_all):
+    def get_events(self, from_date):
         """Use Paging to export events, otherwise getting all at once can crash servers"""
         params = {
             'program': Config.program_uid,
@@ -133,19 +133,22 @@ class Dhis(object):
             'pageSize': 100,
             'totalPages': True
         }
-        if not import_all:
-            yesterday = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
-            params['startDate'] = yesterday
-            params['endDate'] = yesterday
+        if from_date:
+            params['startDate'] = from_date
+            params['endDate'] = from_date
         first_page = self.get(endpoint='events', params=params).json()
         yield first_page
 
-        no_of_pages = first_page['pager']['pageCount']
-        logger.debug(no_of_pages)
-        for p in range(2, no_of_pages + 1):
-            params['page'] = p
-            next_page = self.get(endpoint='events', params=params).json()
-            yield next_page
+        try:
+            no_of_pages = first_page['pager']['pageCount']
+        except KeyError:
+            yield None
+        else:
+            logger.debug(no_of_pages)
+            for p in range(2, no_of_pages + 1):
+                params['page'] = p
+                next_page = self.get(endpoint='events', params=params).json()
+                yield next_page
 
     def is_duplicate(self, sid):
         """Check DHIS2 for a duplicate event by SID across all OrgUnits"""
