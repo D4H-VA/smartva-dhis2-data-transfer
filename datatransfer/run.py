@@ -36,14 +36,14 @@ def _parse_args(args=sys.argv[1:]):
                        action='store_true',
                        required=False,
                        default=False,
-                       help=u"Get all events")
+                       help=u"Import all events of a program")
 
     group.add_argument(u'--from_date',
                        dest='from_date',
                        action='store',
                        required=False,
                        type=valid_date,
-                       help=u"Get events from a certain date")
+                       help=u"Import events of a certain date")
 
     arguments = parser.parse_args(args)
     return arguments
