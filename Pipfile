@@ -12,3 +12,6 @@ colorama = {markers = "sys_platform == 'win32'"}
 
 [requires]
 python_version = "3.5"
+
+[scripts]
+data-transfer = "python -m datatransfer"
