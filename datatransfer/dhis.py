@@ -114,6 +114,11 @@ class Dhis(object):
         data['attributeCategoryOptions'] = Config.target_attribute_category_option
         data['attributeOptionCombo'] = Config.target_attribute_option_combo
 
+        if not Config.retain_event_uid:
+            # remove Event UID to enable pushing
+            # without needing to permanently delete soft-deleted events
+            del data['event']
+
         r = self.post(endpoint='events', data=data)
         try:
             RaiseImportFailure(r.json())

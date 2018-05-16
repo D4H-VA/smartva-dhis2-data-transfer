@@ -40,6 +40,8 @@ class Config(object):
     target_attribute_category_option = _parser.get('dhis', 'attribute_category_option')
     target_attribute_option_combo = _parser.get('dhis', 'attribute_option_combo')
 
+    retain_event_uid = _parser.getboolean('dhis', 'retain_event_uid')
+
 
 def setup_logger(log_path):
     # Default logger
